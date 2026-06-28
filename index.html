@@ -4,19 +4,164 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Atlas Cobros – Proceso de Incorporación</title>
-  <!-- Google Fonts - Inter -->
+  <meta name="description" content="Proceso de incorporación oficial para nuevos colaboradores de Atlas Cobros. Completa tu registro en minutos.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-  <!-- Styles -->
-  <link rel="stylesheet" href="styles.css">
+  <style>
+    :root {
+      --font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      --bg-main: #0b0c10;
+      --bg-card: rgba(26, 29, 38, 0.65);
+      --bg-input: #12151c;
+      --border-color: rgba(255, 255, 255, 0.08);
+      --border-focus: #d4af37;
+      --primary: #d4af37;
+      --primary-hover: #e5c158;
+      --primary-light: rgba(212, 175, 55, 0.1);
+      --success: #10b981;
+      --success-light: rgba(16, 185, 129, 0.1);
+      --warning: #f59e0b;
+      --text-primary: #f3f4f6;
+      --text-secondary: #9ca3af;
+      --text-muted: #6b7280;
+      --shadow-lg: 0 10px 25px -5px rgba(0,0,0,0.3), 0 8px 10px -6px rgba(0,0,0,0.3);
+      --transition-fast: 0.15s ease;
+      --transition-normal: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+      --transition-slow: 0.4s ease;
+      --radius-sm: 6px;
+      --radius-md: 12px;
+      --radius-lg: 18px;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; outline: none; }
+    body {
+      font-family: var(--font-family);
+      background-color: var(--bg-main);
+      background-image:
+        radial-gradient(at 0% 0%, rgba(212,175,55,0.05) 0px, transparent 50%),
+        radial-gradient(at 100% 100%, rgba(16,185,129,0.03) 0px, transparent 50%);
+      background-attachment: fixed;
+      color: var(--text-primary);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 20px;
+    }
+    .onboarding-wrapper {
+      width: 100%; max-width: 720px;
+      display: flex; flex-direction: column;
+      gap: 24px; padding-top: 20px; padding-bottom: 40px;
+    }
+    .onboarding-header { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; }
+    .logo-container { display: flex; align-items: center; gap: 8px; }
+    .logo-icon { color: var(--primary); font-size: 1.4rem; font-weight: 800; }
+    .logo-text { font-size: 1rem; font-weight: 700; letter-spacing: 2px; color: #fff; }
+    .header-badge { display: flex; align-items: center; gap: 8px; background-color: rgba(255,255,255,0.04); border: 1px solid var(--border-color); padding: 6px 14px; border-radius: 50px; }
+    .status-indicator { width: 8px; height: 8px; background-color: var(--success); border-radius: 50%; box-shadow: 0 0 8px var(--success); animation: pulse-green 2s infinite; }
+    .status-text { font-size: 0.75rem; font-weight: 600; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.5px; }
+    .progress-container { position: relative; margin: 10px 0 30px 0; padding: 0 10px; }
+    .progress-bar-background { position: absolute; top: 15px; left: 20px; right: 20px; height: 3px; background-color: rgba(255,255,255,0.05); border-radius: 2px; z-index: 1; }
+    .progress-bar-fill { height: 100%; width: 0%; background: linear-gradient(90deg, var(--primary), var(--success)); border-radius: 2px; transition: width var(--transition-slow); }
+    .progress-steps { position: relative; display: flex; justify-content: space-between; z-index: 2; }
+    .progress-step { width: 32px; height: 32px; background-color: #161920; border: 2px solid rgba(255,255,255,0.1); color: var(--text-secondary); border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 0.85rem; font-weight: 700; transition: all var(--transition-normal); position: relative; cursor: default; }
+    .progress-step.active { border-color: var(--primary); background-color: var(--primary-light); color: var(--primary); box-shadow: 0 0 12px rgba(212,175,55,0.2); }
+    .progress-step.completed { border-color: var(--success); background-color: var(--success-light); color: var(--success); box-shadow: 0 0 12px rgba(16,185,129,0.2); }
+    .progress-step::after { content: attr(data-label); position: absolute; top: 38px; font-size: 0.7rem; font-weight: 500; color: var(--text-muted); white-space: nowrap; }
+    .progress-step.active::after { color: var(--primary); font-weight: 600; }
+    .progress-step.completed::after { color: var(--success); }
+    .onboarding-card { display: none; background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 40px; box-shadow: var(--shadow-lg); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); }
+    .onboarding-card.active { display: block; animation: slide-up-fade 0.5s cubic-bezier(0.16,1,0.3,1) forwards; }
+    .card-icon-header { width: 64px; height: 64px; background: rgba(255,255,255,0.03); border: 1px solid var(--border-color); border-radius: 50%; display: flex; justify-content: center; align-items: center; margin-bottom: 24px; color: var(--primary); }
+    .card-icon-header.success { color: var(--success); border-color: var(--success); background-color: var(--success-light); }
+    .hero-icon { width: 32px; height: 32px; }
+    .card-title { font-size: 1.8rem; font-weight: 800; letter-spacing: -0.5px; line-height: 1.3; margin-bottom: 12px; color: #fff; }
+    .card-title.text-success { color: var(--success); }
+    .text-center { text-align: center; }
+    .card-subtitle { font-size: 1rem; color: var(--text-secondary); margin-bottom: 28px; font-weight: 400; }
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .col-span-2 { grid-column: span 2; }
+    .mt-4 { margin-top: 16px; } .mt-6 { margin-top: 24px; } .mb-4 { margin-bottom: 16px; }
+    .form-group { display: flex; flex-direction: column; gap: 8px; }
+    .form-group label { font-size: 0.85rem; font-weight: 600; color: var(--text-secondary); letter-spacing: 0.3px; }
+    .form-group input, .form-group textarea, .form-group select { background-color: var(--bg-input); border: 1px solid var(--border-color); border-radius: var(--radius-sm); padding: 12px 16px; color: #fff; font-family: var(--font-family); font-size: 0.95rem; transition: all var(--transition-fast); appearance: none; -webkit-appearance: none; width: 100%; }
+    .form-group select { background-image: url("data:image/svg+xml;utf8,<svg fill='white' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/><path d='M0 0h24v24H0z' fill='none'/></svg>"); background-repeat: no-repeat; background-position: right 12px center; padding-right: 40px; }
+    .form-group input::placeholder, .form-group textarea::placeholder { color: #4b5563; }
+    .form-group input:focus, .form-group textarea:focus, .form-group select:focus { border-color: var(--border-focus); box-shadow: 0 0 0 3px rgba(212,175,55,0.15); background-color: rgba(18,21,28,0.8); }
+    .form-group select option, .form-group select optgroup { background-color: #12151c; color: #fff; }
+    .form-group textarea { resize: vertical; }
+    .form-section-title { font-size: 1.15rem; font-weight: 700; color: var(--primary); border-top: 1px solid var(--border-color); padding-top: 24px; margin-top: 8px; }
+    .form-section-desc { font-size: 0.85rem; color: var(--text-secondary); margin-top: 4px; }
+    .code-input-group input { text-align: center; font-size: 1.3rem; letter-spacing: 2px; font-weight: 700; text-transform: uppercase; }
+    .error-text { color: #ef4444; font-size: 0.85rem; font-weight: 500; margin-top: 4px; animation: shake-anim 0.3s ease; }
+    .card-actions { display: flex; gap: 16px; align-items: center; margin-top: 32px; }
+    .justify-between { justify-content: space-between; } .justify-center { justify-content: center; }
+    .btn-primary { background-color: var(--primary); color: #000; border: none; border-radius: var(--radius-md); padding: 14px 28px; font-size: 0.95rem; font-weight: 700; cursor: pointer; display: flex; align-items: center; gap: 10px; transition: all var(--transition-normal); box-shadow: 0 4px 12px rgba(212,175,55,0.2); }
+    .btn-primary:hover { background-color: var(--primary-hover); transform: translateY(-1px); box-shadow: 0 6px 18px rgba(212,175,55,0.35); }
+    .btn-primary:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+    .btn-secondary { background-color: transparent; color: var(--text-secondary); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 14px 24px; font-size: 0.95rem; font-weight: 600; cursor: pointer; transition: all var(--transition-fast); }
+    .btn-secondary:hover { background-color: rgba(255,255,255,0.05); color: #fff; border-color: rgba(255,255,255,0.2); }
+    .btn-arrow { font-size: 1.15rem; transition: transform var(--transition-fast); }
+    .btn-primary:hover .btn-arrow { transform: translateX(4px); }
+    .info-highlight-box { background-color: rgba(255,255,255,0.02); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 24px; margin-bottom: 24px; }
+    .info-highlight-box h3 { font-size: 1rem; font-weight: 700; margin-bottom: 12px; color: #fff; }
+    .info-highlight-box p { font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6; }
+    .sandbox-simulator-banner { background-color: rgba(245,158,11,0.08); border: 1px dashed rgba(245,158,11,0.3); border-radius: var(--radius-md); padding: 16px 20px; margin-top: 20px; font-size: 0.85rem; color: #fcd34d; }
+    .feature-bullets { margin-bottom: 28px; }
+    .bullet-item { display: flex; gap: 14px; align-items: flex-start; margin-bottom: 16px; }
+    .bullet-check { display: flex; align-items: center; justify-content: center; width: 22px; height: 22px; background-color: rgba(255,255,255,0.05); color: var(--primary); border-radius: 50%; font-size: 0.8rem; font-weight: 700; flex-shrink: 0; margin-top: 2px; }
+    .bullet-text { font-size: 0.95rem; color: var(--text-secondary); line-height: 1.5; }
+    .bullet-text strong { color: #fff; }
+    .clean-list { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+    .clean-list li { display: flex; align-items: flex-start; gap: 10px; font-size: 0.85rem; color: var(--text-secondary); line-height: 1.4; }
+    .bullet-dot { width: 6px; height: 6px; background-color: var(--primary); border-radius: 50%; margin-top: 8px; flex-shrink: 0; }
+    .instruction-steps { display: flex; flex-direction: column; gap: 12px; margin-top: 16px; }
+    .inst-step { display: flex; align-items: flex-start; gap: 14px; background-color: rgba(255,255,255,0.02); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 14px 16px; }
+    .inst-num { min-width: 28px; height: 28px; background-color: var(--primary-light); border: 1px solid rgba(212,175,55,0.3); color: var(--primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; font-weight: 700; flex-shrink: 0; }
+    .flow-preview-list { display: flex; flex-direction: column; gap: 16px; }
+    .flow-preview-item { display: flex; align-items: flex-start; gap: 16px; padding: 16px; background-color: rgba(255,255,255,0.02); border: 1px solid var(--border-color); border-radius: var(--radius-md); }
+    .item-circle { width: 36px; height: 36px; background-color: rgba(255,255,255,0.05); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; flex-shrink: 0; }
+    .item-circle.success { background-color: rgba(16,185,129,0.1); border: 1px solid rgba(16,185,129,0.2); }
+    .item-details h4 { font-size: 0.9rem; font-weight: 700; color: #fff; margin-bottom: 4px; }
+    .item-details p { font-size: 0.85rem; color: var(--text-secondary); margin: 0; }
+    .success-checkmark { width: 80px; height: 80px; margin: 0 auto 30px auto; }
+    .check-icon { width: 80px; height: 80px; position: relative; border-radius: 50%; box-sizing: content-box; border: 4px solid var(--success); }
+    .icon-line { height: 5px; background-color: var(--success); display: block; border-radius: 2px; position: absolute; z-index: 10; }
+    .icon-line.line-tip { top: 46px; left: 14px; width: 25px; transform: rotate(45deg); animation: icon-line-tip 0.75s; }
+    .icon-line.line-long { top: 38px; right: 8px; width: 47px; transform: rotate(-45deg); animation: icon-line-long 0.75s; }
+    .icon-circle { top: -4px; left: -4px; z-index: 10; width: 80px; height: 80px; border-radius: 50%; border: 4px solid rgba(16,185,129,0.2); box-sizing: content-box; position: absolute; }
+    .icon-fix { top: 8px; width: 5px; left: 26px; z-index: 1; height: 85px; position: absolute; transform: rotate(-45deg); }
+    .spinner-inline { display: inline-block; width: 14px; height: 14px; border: 2px solid rgba(0,0,0,0.2); border-top-color: #000; border-radius: 50%; animation: spin 0.8s linear infinite; vertical-align: middle; margin-left: 8px; }
+    .success-footer-message { font-size: 0.85rem; color: var(--warning); }
+    .onboarding-footer { text-align: center; padding: 12px 0 24px 0; }
+    .onboarding-footer p { font-size: 0.75rem; color: var(--text-muted); }
+    .animated-mail { animation: float-mail 2.5s ease infinite; }
+    @keyframes pulse-green { 0% { box-shadow: 0 0 0 0 rgba(16,185,129,0.6); } 70% { box-shadow: 0 0 0 8px rgba(16,185,129,0); } 100% { box-shadow: 0 0 0 0 rgba(16,185,129,0); } }
+    @keyframes spin { 100% { transform: rotate(360deg); } }
+    @keyframes slide-up-fade { from { transform: translateY(15px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+    @keyframes shake-anim { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-4px); } 75% { transform: translateX(4px); } }
+    @keyframes float-mail { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
+    @keyframes icon-line-tip { 0% { width:0;left:1px;top:19px; } 54% { width:0;left:1px;top:19px; } 70% { width:50px;left:-8px;top:37px; } 84% { width:17px;left:21px;top:48px; } 100% { width:25px;left:14px;top:46px; } }
+    @keyframes icon-line-long { 0% { width:0;right:46px;top:54px; } 65% { width:0;right:46px;top:54px; } 84% { width:55px;right:0px;top:35px; } 100% { width:47px;right:8px;top:38px; } }
+    @media (max-width: 640px) {
+      body { padding: 10px; }
+      .onboarding-card { padding: 24px 16px; }
+      .form-grid { grid-template-columns: 1fr; }
+      .col-span-2 { grid-column: span 1; }
+      .onboarding-header { flex-direction: column; gap: 12px; align-items: flex-start; }
+      .header-badge { align-self: flex-end; }
+      .card-title { font-size: 1.4rem; }
+      .progress-step::after { display: none; }
+    }
+  </style>
 </head>
 <body>
   <div class="onboarding-wrapper">
-    <!-- Header with logo and status -->
     <header class="onboarding-header">
       <div class="logo-container">
-        <span class="logo-icon">▲</span>
+        <span class="logo-icon">&#9650;</span>
         <span class="logo-text">ATLAS COBROS</span>
       </div>
       <div class="header-badge">
@@ -24,8 +169,6 @@
         <span class="status-text">Proceso de Selección Activo</span>
       </div>
     </header>
-
-    <!-- Progress Indicator -->
     <div class="progress-container">
       <div class="progress-bar-background">
         <div class="progress-bar-fill" id="progress-bar-fill"></div>
@@ -39,11 +182,7 @@
         <div class="progress-step" id="p-step-5" data-label="Operación">6</div>
       </div>
     </div>
-
-    <!-- Main Card Container -->
-    <main class="card-container">
-      
-      <!-- SCREEN 0: INICIO (WELCOME SCREEN) -->
+    <main>
       <section class="onboarding-card active" id="screen-0">
         <div class="card-icon-header">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="hero-icon">
@@ -52,258 +191,122 @@
         </div>
         <h1 class="card-title">Has sido seleccionado(a) para iniciar tu proceso de incorporación</h1>
         <p class="card-subtitle">Completa los pasos a continuación para activar tu acceso al sistema de trabajo y agendar tu capacitación.</p>
-        
         <div class="feature-bullets">
-          <div class="bullet-item">
-            <div class="bullet-check">✓</div>
-            <div class="bullet-text">
-              <strong>Paso 1:</strong> Registrar tus datos básicos de contacto.
-            </div>
-          </div>
-          <div class="bullet-item">
-            <div class="bullet-check">✓</div>
-            <div class="bullet-text">
-              <strong>Paso 2:</strong> Activación segura de la línea internacional vía correo electrónico.
-            </div>
-          </div>
-          <div class="bullet-item">
-            <div class="bullet-check">✓</div>
-            <div class="bullet-text">
-              <strong>Paso 3:</strong> Asignación de cartera y capacitación 100% online.
-            </div>
-          </div>
+          <div class="bullet-item"><div class="bullet-check">&#10003;</div><div class="bullet-text"><strong>Paso 1:</strong> Registrar tus datos básicos de contacto.</div></div>
+          <div class="bullet-item"><div class="bullet-check">&#10003;</div><div class="bullet-text"><strong>Paso 2:</strong> Activación segura de la línea internacional vía correo electrónico.</div></div>
+          <div class="bullet-item"><div class="bullet-check">&#10003;</div><div class="bullet-text"><strong>Paso 3:</strong> Asignación de cartera y capacitación 100% online.</div></div>
         </div>
-
         <div class="card-actions">
-          <button class="btn-primary ripple-btn" onclick="goToStep(1)">
-            Comenzar incorporación
-            <span class="btn-arrow">→</span>
-          </button>
+          <button class="btn-primary" onclick="goToStep(1)">Comenzar incorporación <span class="btn-arrow">&#8594;</span></button>
         </div>
       </section>
-
-      <!-- SCREEN 1: CANDIDATE DATA FORM -->
       <section class="onboarding-card" id="screen-1">
         <h2 class="card-title">Datos del candidato</h2>
         <p class="card-subtitle">Por favor, ingresa tu información actualizada para generar tu expediente y programar los accesos.</p>
-        
         <form id="candidate-form" onsubmit="handleFormSubmit(event)">
           <div class="form-grid">
-            <div class="form-group">
-              <label for="fullname">Nombre completo</label>
-              <input type="text" id="fullname" placeholder="Ej. Juan Pérez" required>
-            </div>
-            
-            <div class="form-group">
-              <label for="phone">Teléfono de contacto (WhatsApp)</label>
-              <input type="tel" id="phone" placeholder="Ej. +56 9 1234 5678" required>
-            </div>
-
-            <div class="form-group">
-              <label for="email">Correo electrónico</label>
-              <input type="email" id="email" placeholder="nombre@correo.com" required>
-            </div>
-
-            <div class="form-group">
-              <label for="country">País de residencia</label>
-              <input type="text" id="country" placeholder="Ej. Chile, México, Colombia" required>
-            </div>
-
-            <div class="form-group col-span-2">
-              <label for="experience">Experiencia laboral previa (Opcional)</label>
-              <textarea id="experience" rows="3" placeholder="Describe brevemente tu experiencia en cobranza, ventas o atención al cliente..."></textarea>
-            </div>
+            <div class="form-group"><label for="fullname">Nombre completo</label><input type="text" id="fullname" placeholder="Ej. Juan Pérez" required></div>
+            <div class="form-group"><label for="phone">Teléfono de contacto (WhatsApp)</label><input type="tel" id="phone" placeholder="Ej. +56 9 1234 5678" required></div>
+            <div class="form-group"><label for="email">Correo electrónico</label><input type="email" id="email" placeholder="nombre@correo.com" required></div>
+            <div class="form-group"><label for="country">País de residencia</label><input type="text" id="country" placeholder="Ej. Chile, México, Colombia" required></div>
+            <div class="form-group col-span-2"><label for="experience">Experiencia laboral previa (Opcional)</label><textarea id="experience" rows="3" placeholder="Describe brevemente tu experiencia en cobranza, ventas o atención al cliente..."></textarea></div>
           </div>
-
           <h3 class="form-section-title">Datos bancarios para pago de comisiones</h3>
           <p class="form-section-desc">Ingresa tu información bancaria para recibir el pago de tus comisiones. Todos los datos son tratados de forma confidencial.</p>
-
           <div class="form-grid mt-4">
-            <div class="form-group">
-              <label for="bank-name">Banco / Medio de pago</label>
+            <div class="form-group"><label for="bank-name">Banco / Medio de pago</label>
               <select id="bank-name" required>
                 <option value="" disabled selected>Selecciona tu banco o billetera</option>
                 <optgroup label="Bancos tradicionales">
-                  <option value="Banco de Chile">Banco de Chile</option>
-                  <option value="Banco Santander">Banco Santander</option>
-                  <option value="BancoEstado">BancoEstado</option>
-                  <option value="Banco BCI">Banco BCI</option>
-                  <option value="Banco Scotiabank">Banco Scotiabank</option>
-                  <option value="Banco Itaú">Banco Itaú</option>
-                  <option value="Banco Falabella">Banco Falabella</option>
-                  <option value="Banco Ripley">Banco Ripley</option>
-                  <option value="Banco Security">Banco Security</option>
-                  <option value="Banco BICE">Banco BICE</option>
-                  <option value="Banco Internacional">Banco Internacional</option>
-                  <option value="Banco Consorcio">Banco Consorcio</option>
-                  <option value="Banco BTG Pactual">Banco BTG Pactual</option>
-                  <option value="Coopeuch">Coopeuch</option>
-                  <option value="HSBC Chile">HSBC Chile</option>
+                  <option>Banco de Chile</option><option>Banco Santander</option><option>BancoEstado</option><option>Banco BCI</option><option>Banco Scotiabank</option><option>Banco Itaú</option><option>Banco Falabella</option><option>Banco Ripley</option><option>Banco Security</option><option>Banco BICE</option><option>Banco Internacional</option><option>Banco Consorcio</option><option>Banco BTG Pactual</option><option>Coopeuch</option><option>HSBC Chile</option>
                 </optgroup>
                 <optgroup label="Digitales">
-                  <option value="Tenpo">Tenpo</option>
-                  <option value="Mercado Pago">Mercado Pago</option>
-                  <option value="Mach">Mach</option>
-                  <option value="Cuenta RUT">Cuenta RUT</option>
-                  <option value="FPAY">FPAY</option>
-                  <option value="Copec Pay">Copec Pay</option>
-                  <option value="Prepago Los Héroes">Prepago Los Héroes</option>
-                  <option value="Caja Los Andes">Caja Los Andes</option>
-                  <option value="Tapp">Tapp</option>
-                  <option value="Wilobank">Wilobank</option>
+                  <option>Tenpo</option><option>Mercado Pago</option><option>Mach</option><option>Cuenta RUT</option><option>FPAY</option><option>Copec Pay</option><option>Prepago Los Héroes</option><option>Caja Los Andes</option><option>Tapp</option><option>Wilobank</option>
                 </optgroup>
               </select>
             </div>
-
-            <div class="form-group">
-              <label for="account-type">Tipo de cuenta</label>
+            <div class="form-group"><label for="account-type">Tipo de cuenta</label>
               <select id="account-type" required>
                 <option value="" disabled selected>Selecciona tipo de cuenta</option>
-                <option value="Cuenta corriente">Cuenta corriente</option>
-                <option value="Cuenta de ahorro">Cuenta de ahorro</option>
-                <option value="Cuenta vista">Cuenta vista</option>
-                <option value="Cuenta RUT">Cuenta RUT</option>
+                <option>Cuenta corriente</option><option>Cuenta de ahorro</option><option>Cuenta vista</option><option>Cuenta RUT</option>
               </select>
             </div>
-
-            <div class="form-group">
-              <label for="account-number">Número de cuenta</label>
-              <input type="number" id="account-number" placeholder="Ej. 12345678" required>
-            </div>
-
-            <div class="form-group">
-              <label for="account-holder">Titular de la cuenta</label>
-              <input type="text" id="account-holder" placeholder="Nombre completo del titular" required>
-            </div>
+            <div class="form-group"><label for="account-number">Número de cuenta</label><input type="number" id="account-number" placeholder="Ej. 12345678" required></div>
+            <div class="form-group"><label for="account-holder">Titular de la cuenta</label><input type="text" id="account-holder" placeholder="Nombre completo del titular" required></div>
           </div>
-
           <div class="card-actions justify-between mt-6">
             <button type="button" class="btn-secondary" onclick="goToStep(0)">Atrás</button>
-            <button type="submit" class="btn-primary ripple-btn">
-              Continuar
-              <span class="btn-arrow">→</span>
-            </button>
+            <button type="submit" class="btn-primary" id="btn-submit-form">Continuar <span class="btn-arrow">&#8594;</span></button>
           </div>
         </form>
       </section>
-
-      <!-- SCREEN 2: TOOL ACTIVATION (CORREO ENVIADO - MATCHES PHOTO) -->
       <section class="onboarding-card" id="screen-2">
         <div class="card-icon-header success">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="hero-icon animated-mail">
             <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
           </svg>
         </div>
-        
         <h2 class="card-title">¡Registro completado! Correo enviado</h2>
         <p class="card-subtitle">Hemos enviado instrucciones seguras a tu cuenta de correo electrónico registrada para la activación de tu herramienta.</p>
-
         <div class="info-highlight-box">
           <h3 class="mb-4">¿Qué debes hacer ahora?</h3>
-          <p>
-            Por seguridad y para mantener la transparencia del proceso, el enlace de activación de tu línea telefónica internacional eSIM y los detalles de las credenciales se gestionan de forma externa.
-          </p>
+          <p>Por seguridad y para mantener la transparencia del proceso, el enlace de activación de tu línea telefónica internacional eSIM y los detalles de las credenciales se gestionan de forma externa.</p>
           <div class="instruction-steps">
-            <div class="inst-step">
-              <span class="inst-num">1</span>
-              <span>Revisa tu <strong>Bandeja de Entrada</strong> (o carpeta de Spam/Promociones).</span>
-            </div>
-            <div class="inst-step">
-              <span class="inst-num">2</span>
-              <span>Abre el correo con el asunto <strong>"Atlas Cobros – Activación de Línea Internacional"</strong>.</span>
-            </div>
-            <div class="inst-step">
-              <span class="inst-num">3</span>
-              <span>Sigue el enlace del proveedor externo para activar tu eSIM de trabajo.</span>
-            </div>
+            <div class="inst-step"><span class="inst-num">1</span><span>Revisa tu <strong>Bandeja de Entrada</strong> (o carpeta de Spam/Promociones).</span></div>
+            <div class="inst-step"><span class="inst-num">2</span><span>Abre el correo con el asunto <strong>"Atlas Cobros – Activación de Línea Internacional"</strong>.</span></div>
+            <div class="inst-step"><span class="inst-num">3</span><span>Sigue el enlace del proveedor externo para activar tu eSIM de trabajo.</span></div>
           </div>
         </div>
-
-        <div class="card-actions justify-between mt-6">
+        <div class="card-actions justify-between">
           <button class="btn-secondary" onclick="goToStep(1)">Atrás</button>
-          <button class="btn-primary ripple-btn" onclick="goToStep(3)">
-            Continuar
-            <span class="btn-arrow">→</span>
-          </button>
+          <button class="btn-primary" onclick="goToStep(3)">Continuar <span class="btn-arrow">&#8594;</span></button>
         </div>
       </section>
-
-      <!-- SCREEN 3: CODE VALIDATION -->
       <section class="onboarding-card" id="screen-3">
         <div class="card-icon-header">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="hero-icon">
             <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 5.25a3 3 0 013 3m3 0a6 6 0 01-7.029 5.912c-.563-.097-1.159.026-1.563.43L10.5 17.25H8.25v2.25H6v2.25H2.25v-2.818c0-.597.237-1.17.659-1.591l6.499-6.499c.404-.404.527-1 .43-1.563A6 6 0 1121.75 8.25z" />
           </svg>
         </div>
-
         <h2 class="card-title">Ingresa tu código de activación</h2>
-        <p class="card-subtitle">Tu código de activación es requerido para continuar tu proceso en Atlas Cobros. Este código fue enviado automáticamente al correo electrónico registrado después de la activación del chip.</p>
-
-        <!-- Integrated Validation Code Field -->
+        <p class="card-subtitle">Tu código de activación es requerido para continuar tu proceso en Atlas Cobros. Este código fue enviado automáticamente al correo electrónico registrado.</p>
         <form id="code-validation-form" onsubmit="handleCodeSubmit(event)">
           <div class="form-group code-input-group">
             <label for="activation-code">Código de activación</label>
             <input type="text" id="activation-code" placeholder="Ingresa tu código único de acceso" required autocomplete="off">
             <p class="error-text" id="code-error" style="display:none;">Código inválido, intenta nuevamente</p>
           </div>
-
           <div class="sandbox-simulator-banner">
-            <p>💡 <strong>Modo Demo / Simulación:</strong> Ingresa el código <strong>ATLAS2026</strong> para simular una validación exitosa.</p>
+            <p>&#128161; <strong>Modo Demo / Simulación:</strong> Ingresa el código <strong>ATLAS2026</strong> para simular una validación exitosa.</p>
           </div>
-
           <div class="card-actions justify-between mt-6">
             <button type="button" class="btn-secondary" onclick="goToStep(2)">Atrás</button>
-            <button type="submit" class="btn-primary ripple-btn">
-              Validar código
-              <span class="btn-arrow">→</span>
-            </button>
+            <button type="submit" class="btn-primary">Validar código <span class="btn-arrow">&#8594;</span></button>
           </div>
         </form>
       </section>
-
-      <!-- SCREEN 4: TRAINING -->
       <section class="onboarding-card" id="screen-4">
         <div class="card-icon-header">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="hero-icon">
             <path stroke-linecap="round" stroke-linejoin="round" d="M4.26 10.147a60.436 60.436 0 00-.491 6.347A48.62 48.62 0 0112 20.904a48.62 48.62 0 018.232-4.41 60.46 60.46 0 00-.491-6.347m-15.482 0a50.57 50.57 0 00-2.658-.813A59.905 59.905 0 0112 3.493a59.902 59.902 0 0110.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.717 50.717 0 0112 13.489a50.702 50.702 0 017.74-3.342M22.25 12v4.25m-1.836-1.861L20.25 18" />
           </svg>
         </div>
-        
         <h2 class="card-title">Capacitación online</h2>
         <p class="card-subtitle">Tu registro ha sido verificado exitosamente. La capacitación se realizará con personas de la empresa a través de Google Meet. Al finalizar el proceso de registro, se te enviará el horario correspondiente.</p>
-
         <div class="info-highlight-box">
           <h3 class="mb-4">Durante esta etapa aprenderás:</h3>
           <ul class="clean-list">
-            <li>
-              <span class="bullet-dot"></span>
-              <span>Uso de la plataforma digital</span>
-            </li>
-            <li>
-              <span class="bullet-dot"></span>
-              <span>Flujo de gestión de compromisos</span>
-            </li>
-            <li>
-              <span class="bullet-dot"></span>
-              <span>Protocolos de contacto ético y regulaciones aplicables</span>
-            </li>
-            <li>
-              <span class="bullet-dot"></span>
-              <span>Proceso operativo diario</span>
-            </li>
+            <li><span class="bullet-dot"></span><span>Uso de la plataforma digital</span></li>
+            <li><span class="bullet-dot"></span><span>Flujo de gestión de compromisos</span></li>
+            <li><span class="bullet-dot"></span><span>Protocolos de contacto ético y regulaciones aplicables</span></li>
+            <li><span class="bullet-dot"></span><span>Proceso operativo diario</span></li>
           </ul>
         </div>
-
         <div class="card-actions justify-between">
           <button class="btn-secondary" onclick="goToStep(3)">Atrás</button>
-          <button class="btn-primary ripple-btn" onclick="goToStep(5)">
-            Continuar
-            <span class="btn-arrow">→</span>
-          </button>
+          <button class="btn-primary" onclick="goToStep(5)">Continuar <span class="btn-arrow">&#8594;</span></button>
         </div>
       </section>
-
-      <!-- SCREEN 5: SUCCESS / WELCOME (UPDATED CLEAN CLOSE) -->
       <section class="onboarding-card" id="screen-5">
         <div class="success-checkmark">
           <div class="check-icon">
@@ -313,44 +316,104 @@
             <div class="icon-fix"></div>
           </div>
         </div>
-        
         <h2 class="card-title text-success text-center">¡Proceso Completado con Éxito!</h2>
         <p class="card-subtitle text-center">Tu incorporación en Atlas Cobros ha sido registrada en el sistema.</p>
-
         <div class="info-highlight-box">
           <h3 class="mb-4">Próximos pasos importantes:</h3>
           <div class="flow-preview-list">
             <div class="flow-preview-item">
-              <div class="item-circle success">📩</div>
-              <div class="item-details">
-                <h4>Confirmación de Capacitación</h4>
-                <p>En los próximos minutos recibirás un correo electrónico con la fecha, hora y enlace de acceso para tu capacitación online obligatoria.</p>
-              </div>
+              <div class="item-circle success">&#128233;</div>
+              <div class="item-details"><h4>Confirmación de Capacitación</h4><p>En los próximos minutos recibirás un correo electrónico con la fecha, hora y enlace de acceso para tu capacitación online obligatoria.</p></div>
             </div>
             <div class="flow-preview-item">
-              <div class="item-circle success">💼</div>
-              <div class="item-details">
-                <h4>Asignación de Cartera de Clientes</h4>
-                <p>Una vez finalizada y aprobada la capacitación, se habilitará tu acceso al panel de operaciones y se te entregará tu cartera de clientes inicial para comenzar a trabajar.</p>
-              </div>
+              <div class="item-circle success">&#128188;</div>
+              <div class="item-details"><h4>Asignación de Cartera de Clientes</h4><p>Una vez finalizada y aprobada la capacitación, se habilitará tu acceso al panel de operaciones y se te entregará tu cartera de clientes inicial para comenzar a trabajar.</p></div>
             </div>
           </div>
         </div>
-
         <div class="success-footer-message text-center mt-6">
-          <p>💡 <em>Por favor, mantente atento a tu correo electrónico registrado (incluyendo bandeja de spam o promociones).</em></p>
+          <p>&#128161; <em>Por favor, mantente atento a tu correo electrónico registrado (incluyendo bandeja de spam o promociones).</em></p>
         </div>
       </section>
-
     </main>
-
-    <!-- Footer branding -->
     <footer class="onboarding-footer">
-      <p>© 2026 Atlas Cobros. Todos los derechos reservados. Cumplimiento de normativa de contacto y protección de datos.</p>
+      <p>&#169; 2026 Atlas Cobros. Todos los derechos reservados. Cumplimiento de normativa de contacto y protección de datos.</p>
     </footer>
   </div>
-
-  <!-- Scripts -->
-  <script src="script.js"></script>
+  <script>
+    let currentStep = 0;
+    const totalSteps = 6;
+    const progressPercent = { 0:0, 1:20, 2:40, 3:60, 4:80, 5:100 };
+    let candidateEmail = '';
+    let candidateFullname = '';
+    const EMAIL_API = '/api/send-email';
+    function goToStep(stepIndex) {
+      if (stepIndex < 0 || stepIndex >= totalSteps) return;
+      for (let i = 0; i < totalSteps; i++) {
+        const card = document.getElementById('screen-' + i);
+        if (card) card.classList.remove('active');
+      }
+      const target = document.getElementById('screen-' + stepIndex);
+      if (target) target.classList.add('active');
+      updateProgressBar(stepIndex);
+      currentStep = stepIndex;
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+    function updateProgressBar(stepIndex) {
+      const barFill = document.getElementById('progress-bar-fill');
+      if (barFill) barFill.style.width = progressPercent[stepIndex] + '%';
+      for (let i = 0; i < totalSteps; i++) {
+        const circle = document.getElementById('p-step-' + i);
+        if (!circle) continue;
+        circle.classList.remove('active', 'completed');
+        if (i === stepIndex) circle.classList.add('active');
+        else if (i < stepIndex) circle.classList.add('completed');
+      }
+    }
+    function handleFormSubmit(event) {
+      event.preventDefault();
+      const fullname = document.getElementById('fullname').value;
+      const email    = document.getElementById('email').value;
+      candidateEmail    = email;
+      candidateFullname = fullname;
+      const btn = document.getElementById('btn-submit-form');
+      const originalHTML = btn.innerHTML;
+      btn.disabled = true;
+      btn.innerHTML = 'Procesando... <span class="spinner-inline"></span>';
+      fetch(EMAIL_API, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, fullname })
+      })
+      .catch(() => {})
+      .finally(() => {
+        btn.disabled = false;
+        btn.innerHTML = originalHTML;
+        goToStep(2);
+      });
+    }
+    function handleCodeSubmit(event) {
+      event.preventDefault();
+      const codeInput = document.getElementById('activation-code');
+      const errorText = document.getElementById('code-error');
+      const value = codeInput.value.trim().toUpperCase();
+      if (value === 'ATLAS2026') {
+        errorText.style.display = 'none';
+        goToStep(4);
+      } else {
+        errorText.style.display = 'block';
+        codeInput.style.borderColor = '#ef4444';
+        setTimeout(() => { codeInput.style.borderColor = 'rgba(255,255,255,0.08)'; }, 1500);
+      }
+    }
+    document.addEventListener('DOMContentLoaded', () => {
+      goToStep(0);
+      const fullnameInput = document.getElementById('fullname');
+      const holderInput   = document.getElementById('account-holder');
+      if (fullnameInput && holderInput) {
+        fullnameInput.addEventListener('input', () => { holderInput.value = fullnameInput.value; });
+      }
+    });
+  </script>
 </body>
 </html>
