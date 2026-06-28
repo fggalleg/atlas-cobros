@@ -16,7 +16,8 @@ const transporter = nodemailer.createTransport({
   }
 });
 
-app.get('/', (req, res) => {
+app.use(require('express').static(__dirname));
+app.get('/home', (req, res) => {
   res.send(`<!DOCTYPE html>
 <html lang="es">
 <head>
