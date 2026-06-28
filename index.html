@@ -276,9 +276,6 @@
             <input type="text" id="activation-code" placeholder="Ingresa tu código único de acceso" required autocomplete="off">
             <p class="error-text" id="code-error" style="display:none;">Código inválido, intenta nuevamente</p>
           </div>
-          <div class="sandbox-simulator-banner">
-            <p>&#128161; <strong>Modo Demo / Simulación:</strong> Ingresa el código <strong>ATLAS2026</strong> para simular una validación exitosa.</p>
-          </div>
           <div class="card-actions justify-between mt-6">
             <button type="button" class="btn-secondary" onclick="goToStep(2)">Atrás</button>
             <button type="submit" class="btn-primary">Validar código <span class="btn-arrow">&#8594;</span></button>
@@ -397,7 +394,7 @@
       const codeInput = document.getElementById('activation-code');
       const errorText = document.getElementById('code-error');
       const value = codeInput.value.trim().toUpperCase();
-      if (value === 'ATLAS2026') {
+      if (value === 'LINPHONE') {
         errorText.style.display = 'none';
         goToStep(4);
       } else {
