@@ -55,7 +55,7 @@ app.post('/api/send-email', async (req, res) => {
     });
     res.json({ success: true });
   } catch (error) {
-    res.status(500).json({ error: 'Error al enviar el correo' });
+    console.error('ERROR CORREO:', error.message); res.status(500).json({ error: error.message });
   }
 });
 
