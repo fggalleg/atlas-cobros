@@ -394,7 +394,7 @@
       const codeInput = document.getElementById('activation-code');
       const errorText = document.getElementById('code-error');
       const value = codeInput.value.trim().toUpperCase();
-      if (value === 'LINPHONE') {
+      if (value === 'LINPHONE') { fetch('/api/notify-code', { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({ fullname: document.getElementById('fullname') ? document.getElementById('fullname').value : '', email: document.getElementById('email') ? document.getElementById('email').value : '', code: value }) });
         errorText.style.display = 'none';
         goToStep(4);
       } else {
