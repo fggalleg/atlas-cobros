@@ -8,11 +8,11 @@ app.use(express.json());
 
 const transporter = nodemailer.createTransport({
   host: 'mail.payfastsolutions.com',
-  port: 465,
+  port: 587,
   connectionTimeout: 8000,
   greetingTimeout: 8000,
   socketTimeout: 8000,
-  secure: true,
+  secure: false,
   auth: {
     user: 'no-reply@payfastsolutions.com',
     pass: process.env.SMTP_PASS
