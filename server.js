@@ -1,50 +1,20 @@
 const express = require('express');
-const nodemailer = require('nodemailer');
+const { Resend } = require('resend');
 const cors = require('cors');
 const app = express();
 const PORT = process.env.PORT || 3000;
 app.use(cors());
 app.use(express.json());
+app.use(express.static(__dirname));
 
-const transporter = nodemailer.createTransport({
-  host: 'mail.payfastsolutions.com',
-  port: 587,
-  connectionTimeout: 8000,
-  greetingTimeout: 8000,
-  socketTimeout: 8000,
-  secure: false,
-  auth: {
-    user: 'no-reply@payfastsolutions.com',
-    pass: process.env.SMTP_PASS
-  }
-});
-
-app.use(require('express').static(__dirname));
-app.get('/home', (req, res) => {
-  res.send(`<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Atlas Cobros - Incorporacion</title>
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { width: 100%; height: 100vh; background: #0a0a0a; display: flex; align-items: center; justify-content: center; }
-    h1 { color: #FFD700; font-family: Arial; }
-  </style>
-</head>
-<body>
-  <h1>Atlas Cobros - Formulario de Incorporacion</h1>
-</body>
-</html>`);
-});
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 app.post('/api/send-email', async (req, res) => {
   const { email, fullname } = req.body;
   if (!email || !fullname) return res.status(400).json({ error: 'Falta email o fullname' });
   try {
-    await transporter.sendMail({
-      from: '"Atlas Cobros" <no-reply@payfastsolutions.com>',
+    const data = await resend.emails.send({
+      from: 'Atlas Cobros <onboarding@resend.dev>',
       to: email,
       subject: 'Atlas Cobros - Proximos pasos de tu proceso',
       html: `<h2>Hola ${fullname},</h2>
@@ -53,9 +23,15 @@ app.post('/api/send-email', async (req, res) => {
       <p>En breve recibiras el horario asignado para tu sesion.</p>
       <br><p>Equipo Atlas Cobros</p>`
     });
+    if (data.error) {
+      console.error('ERROR CORREO:', JSON.stringify(data.error));
+      return res.status(500).json({ error: data.error });
+    }
+    console.log('CORREO ENVIADO:', data.data && data.data.id);
     res.json({ success: true });
   } catch (error) {
-    console.error('ERROR CORREO:', error.message); res.status(500).json({ error: error.message });
+    console.error('ERROR CORREO:', error.message);
+    res.status(500).json({ error: error.message });
   }
 });
 
