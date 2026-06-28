@@ -1,1 +1,356 @@
-<!DOCTYPE html><html lang="es"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Atlas Cobros - Incorporacion</title><style>*{margin:0;padding:0;box-sizing:border-box}body{background:#0a0a0a;color:#fff;font-family:Arial,sans-serif;min-height:100vh;display:flex;align-items:center;justify-content:center}.container{width:100%;max-width:600px;padding:40px 20px}.step{display:none}.step.active{display:block}.logo{color:#FFD700;font-size:28px;font-weight:bold;margin-bottom:8px}.subtitle{color:#888;margin-bottom:32px;font-size:14px}h2{color:#FFD700;margin-bottom:16px;font-size:22px}p{color:#ccc;margin-bottom:24px;line-height:1.6}label{display:block;color:#aaa;margin-bottom:6px;font-size:14px}input,select,textarea{width:100%;padding:12px;background:#1a1a1a;border:1px solid #333;border-radius:8px;color:#fff;font-size:15px;margin-bottom:20px}textarea{height:100px;resize:none}select option{background:#1a1a1a}.btn{width:100%;padding:14px;background:#FFD700;color:#000;border:none;border-radius:8px;font-size:16px;font-weight:bold;cursor:pointer;margin-top:8px}.btn:hover{background:#e6c200}.btn-back{background:transparent;border:1px solid #444;color:#888;margin-bottom:12px}.progress{display:flex;gap:8px;margin-bottom:32px}.progress-dot{flex:1;height:4px;background:#333;border-radius:2px}.progress-dot.done{background:#FFD700}.card{background:#1a1a1a;border-radius:12px;padding:24px;margin-bottom:20px}.card ul{list-style:none}.card ul li{padding:8px 0;border-bottom:1px solid #2a2a2a;color:#ccc;font-size:14px}.card ul li:last-child{border-bottom:none}.card ul li::before{content:"● ";color:#FFD700}.check{font-size:48px;text-align:center;margin-bottom:16px}</style></head><body><div class="container"><div class="step active" id="step1"><div class="logo">Atlas Cobros</div><div class="subtitle">Proceso de incorporacion de gestores</div><div class="progress"><div class="progress-dot done"></div><div class="progress-dot"></div><div class="progress-dot"></div><div class="progress-dot"></div><div class="progress-dot"></div><div class="progress-dot"></div></div><h2>Bienvenido al proceso de incorporacion</h2><p>Estas a punto de iniciar tu proceso para convertirte en gestor de cobranza remota con Atlas Cobros. El proceso es simple y toma solo unos minutos.</p><div class="card"><ul><li>Trabajo 100% remoto desde tu pais</li><li>Comisiones atractivas por recuperacion</li><li>Capacitacion incluida via Google Meet</li><li>Pago directo a tu cuenta bancaria</li></ul></div><button class="btn" onclick="goTo(2)">Comenzar</button></div><div class="step" id="step2"><div class="logo">Atlas Cobros</div><div class="subtitle">Paso 2 de 6 - Datos personales</div><div class="progress"><div class="progress-dot done"></div><div class="progress-dot done"></div><div class="progress-dot"></div><div class="progress-dot"></div><div class="progress-dot"></div><div class="progress-dot"></div></div><h2>Datos del candidato</h2><p>Ingresa tu informacion actualizada para generar tu expediente.</p><label>Nombre completo</label><input type="text" id="nombre" placeholder="Tu nombre completo"><label>Telefono (WhatsApp)</label><input type="text" id="telefono" placeholder="+56 9 1234 5678"><label>Correo electronico</label><input type="email" id="correo" placeholder="nombre@correo.com"><label>Pais de residencia</label><input type="text" id="pais" placeholder="Chile, Mexico, Colombia"><label>Experiencia previa (Opcional)</label><textarea id="experiencia" placeholder="Experiencia en cobranza, ventas o atencion al cliente..."></textarea><h2>Datos bancarios</h2><label>Banco / Medio de pago</label><select id="banco"><option value="">Selecciona tu banco</option><optgroup label="Bancos tradicionales"><option>Banco de Chile</option><option>Banco Santander</option><option>BancoEstado</option><option>Banco BCI</option><option>Banco Scotiabank</option><option>Banco Itau</option><option>Banco Falabella</option><option>Banco Ripley</option><option>Banco Security</option><option>Banco BICE</option><option>Banco Internacional</option><option>Banco Consorcio</option><option>Banco BTG Pactual</option><option>Coopeuch</option><option>HSBC Chile</option></optgroup><optgroup label="Digitales"><option>Tenpo</option><option>Mercado Pago</option><option>Mach</option><option>Cuenta RUT</option><option>FPAY</option><option>Copec Pay</option><option>Prepago Los Heroes</option><option>Caja Los Andes</option><option>Tapp</option><option>Wilobank</option></optgroup></select><label>Tipo de cuenta</label><select id="tipoCuenta"><option value="">Selecciona tipo</option><option>Cuenta corriente</option><option>Cuenta de ahorro</option><option>Cuenta vista</option><option>Cuenta RUT</option></select><label>Numero de cuenta</label><input type="text" id="numeroCuenta" placeholder="Numero de cuenta"><label>Titular de la cuenta</label><input type="text" id="titular" placeholder="Nombre del titular"><button class="btn btn-back" onclick="goTo(1)">Atras</button><button class="btn" onclick="validarPaso2()">Continuar</button></div><div class="step" id="step3"><div class="logo">Atlas Cobros</div><div class="subtitle">Paso 3 de 6 - Herramienta</div><div class="progress"><div class="progress-dot done"></div><div class="progress-dot done"></div><div class="progress-dot done"></div><div class="progress-dot"></div><div class="progress-dot"></div><div class="progress-dot"></div></div><h2>Tu herramienta de trabajo</h2><p>Para operar como gestor utilizaras WhatsApp como canal principal de contacto con los deudores.</p><div class="card"><ul><li>Usa WhatsApp desde tu telefono personal</li><li>Recibiras los guiones del equipo</li><li>Operaras en horarios definidos segun tu pais</li><li>Reportaras resultados diariamente</li></ul></div><p>Al continuar confirmas que tienes WhatsApp activo y disponible.</p><button class="btn btn-back" onclick="goTo(2)">Atras</button><button class="btn" onclick="enviarCorreoYContinuar()">Confirmar y continuar</button></div><div class="step" id="step4"><div class="logo">Atlas Cobros</div><div class="subtitle">Paso 4 de 6 - Confirmacion</div><div class="progress"><div class="progress-dot done"></div><div class="progress-dot done"></div><div class="progress-dot done"></div><div class="progress-dot done"></div><div class="progress-dot"></div><div class="progress-dot"></div></div><div class="check">✅</div><h2 style="text-align:center">Registro completado</h2><p style="text-align:center">Tu registro ha sido verificado exitosamente. Hemos enviado un correo a <strong id="correoConfirm"></strong> con los proximos pasos.</p><div class="card"><ul><li>Revisa tu correo electronico</li><li>Te contactaremos por WhatsApp pronto</li><li>Preparate para tu sesion de capacitacion</li></ul></div><button class="btn" onclick="goTo(5)">Continuar</button></div><div class="step" id="step5"><div class="logo">Atlas Cobros</div><div class="subtitle">Paso 5 de 6 - Capacitacion</div><div class="progress"><div class="progress-dot done"></div><div class="progress-dot done"></div><div class="progress-dot done"></div><div class="progress-dot done"></div><div class="progress-dot done"></div><div class="progress-dot"></div></div><h2>Capacitacion online</h2><p>Tu registro ha sido verificado. La capacitacion se realizara con personas de la empresa a traves de <strong style="color:#FFD700">Google Meet</strong>. Al finalizar el proceso se te enviara el horario.</p><div class="card"><ul><li>Uso de la plataforma digital</li><li>Flujo de gestion de compromisos</li><li>Protocolos de contacto etico</li><li>Proceso operativo diario</li></ul></div><button class="btn" onclick="goTo(6)">Continuar</button></div><div class="step" id="step6"><div class="logo">Atlas Cobros</div><div class="subtitle">Paso 6 de 6 - Listo</div><div class="progress"><div class="progress-dot done"></div><div class="progress-dot done"></div><div class="progress-dot done"></div><div class="progress-dot done"></div><div class="progress-dot done"></div><div class="progress-dot done"></div></div><div class="check">🚀</div><h2 style="text-align:center">Bienvenido al equipo</h2><p style="text-align:center">Has completado el proceso de incorporacion a Atlas Cobros. Pronto recibiras tu primer portafolio y el horario de capacitacion.</p><div class="card"><ul><li>Manten WhatsApp activo</li><li>Revisa tu correo regularmente</li><li>Ante dudas escribenos por WhatsApp</li></ul></div></div></div><script>function goTo(n){document.querySelectorAll('.step').forEach(s=>s.classList.remove('active'));document.getElementById('step'+n).classList.add('active');window.scrollTo(0,0);}function validarPaso2(){const nombre=document.getElementById('nombre').value.trim();const correo=document.getElementById('correo').value.trim();const telefono=document.getElementById('telefono').value.trim();const pais=document.getElementById('pais').value.trim();const banco=document.getElementById('banco').value;const tipoCuenta=document.getElementById('tipoCuenta').value;const numeroCuenta=document.getElementById('numeroCuenta').value.trim();const titular=document.getElementById('titular').value.trim();if(!nombre||!correo||!telefono||!pais||!banco||!tipoCuenta||!numeroCuenta||!titular){alert('Por favor completa todos los campos.');return;}document.getElementById('correoConfirm').textContent=correo;goTo(3);}async function enviarCorreoYContinuar(){const nombre=document.getElementById('nombre').value.trim();const correo=document.getElementById('correo').value.trim();try{await fetch('/api/send-email',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:correo,fullname:nombre})});}catch(e){console.log('Error:',e);}goTo(4);}</script></body></html>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Atlas Cobros – Proceso de Incorporación</title>
+  <!-- Google Fonts - Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- Styles -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="onboarding-wrapper">
+    <!-- Header with logo and status -->
+    <header class="onboarding-header">
+      <div class="logo-container">
+        <span class="logo-icon">▲</span>
+        <span class="logo-text">ATLAS COBROS</span>
+      </div>
+      <div class="header-badge">
+        <span class="status-indicator"></span>
+        <span class="status-text">Proceso de Selección Activo</span>
+      </div>
+    </header>
+
+    <!-- Progress Indicator -->
+    <div class="progress-container">
+      <div class="progress-bar-background">
+        <div class="progress-bar-fill" id="progress-bar-fill"></div>
+      </div>
+      <div class="progress-steps">
+        <div class="progress-step active" id="p-step-0" data-label="Inicio">1</div>
+        <div class="progress-step" id="p-step-1" data-label="Datos">2</div>
+        <div class="progress-step" id="p-step-2" data-label="Herramienta">3</div>
+        <div class="progress-step" id="p-step-3" data-label="Confirmación">4</div>
+        <div class="progress-step" id="p-step-4" data-label="Capacitación">5</div>
+        <div class="progress-step" id="p-step-5" data-label="Operación">6</div>
+      </div>
+    </div>
+
+    <!-- Main Card Container -->
+    <main class="card-container">
+      
+      <!-- SCREEN 0: INICIO (WELCOME SCREEN) -->
+      <section class="onboarding-card active" id="screen-0">
+        <div class="card-icon-header">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="hero-icon">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 01-1.043 3.296 3.745 3.745 0 01-3.296 1.043A3.745 3.745 0 0112 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 01-3.296-1.043 3.745 3.745 0 01-1.043-3.296A3.745 3.745 0 013 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 011.043-3.296 3.746 3.746 0 013.296-1.043A3.746 3.746 0 0112 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 013.296 1.043 3.746 3.746 0 011.043 3.296A3.745 3.745 0 0121 12z" />
+          </svg>
+        </div>
+        <h1 class="card-title">Has sido seleccionado(a) para iniciar tu proceso de incorporación</h1>
+        <p class="card-subtitle">Completa los pasos a continuación para activar tu acceso al sistema de trabajo y agendar tu capacitación.</p>
+        
+        <div class="feature-bullets">
+          <div class="bullet-item">
+            <div class="bullet-check">✓</div>
+            <div class="bullet-text">
+              <strong>Paso 1:</strong> Registrar tus datos básicos de contacto.
+            </div>
+          </div>
+          <div class="bullet-item">
+            <div class="bullet-check">✓</div>
+            <div class="bullet-text">
+              <strong>Paso 2:</strong> Activación segura de la línea internacional vía correo electrónico.
+            </div>
+          </div>
+          <div class="bullet-item">
+            <div class="bullet-check">✓</div>
+            <div class="bullet-text">
+              <strong>Paso 3:</strong> Asignación de cartera y capacitación 100% online.
+            </div>
+          </div>
+        </div>
+
+        <div class="card-actions">
+          <button class="btn-primary ripple-btn" onclick="goToStep(1)">
+            Comenzar incorporación
+            <span class="btn-arrow">→</span>
+          </button>
+        </div>
+      </section>
+
+      <!-- SCREEN 1: CANDIDATE DATA FORM -->
+      <section class="onboarding-card" id="screen-1">
+        <h2 class="card-title">Datos del candidato</h2>
+        <p class="card-subtitle">Por favor, ingresa tu información actualizada para generar tu expediente y programar los accesos.</p>
+        
+        <form id="candidate-form" onsubmit="handleFormSubmit(event)">
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="fullname">Nombre completo</label>
+              <input type="text" id="fullname" placeholder="Ej. Juan Pérez" required>
+            </div>
+            
+            <div class="form-group">
+              <label for="phone">Teléfono de contacto (WhatsApp)</label>
+              <input type="tel" id="phone" placeholder="Ej. +56 9 1234 5678" required>
+            </div>
+
+            <div class="form-group">
+              <label for="email">Correo electrónico</label>
+              <input type="email" id="email" placeholder="nombre@correo.com" required>
+            </div>
+
+            <div class="form-group">
+              <label for="country">País de residencia</label>
+              <input type="text" id="country" placeholder="Ej. Chile, México, Colombia" required>
+            </div>
+
+            <div class="form-group col-span-2">
+              <label for="experience">Experiencia laboral previa (Opcional)</label>
+              <textarea id="experience" rows="3" placeholder="Describe brevemente tu experiencia en cobranza, ventas o atención al cliente..."></textarea>
+            </div>
+          </div>
+
+          <h3 class="form-section-title">Datos bancarios para pago de comisiones</h3>
+          <p class="form-section-desc">Ingresa tu información bancaria para recibir el pago de tus comisiones. Todos los datos son tratados de forma confidencial.</p>
+
+          <div class="form-grid mt-4">
+            <div class="form-group">
+              <label for="bank-name">Banco / Medio de pago</label>
+              <select id="bank-name" required>
+                <option value="" disabled selected>Selecciona tu banco o billetera</option>
+                <optgroup label="Bancos tradicionales">
+                  <option value="Banco de Chile">Banco de Chile</option>
+                  <option value="Banco Santander">Banco Santander</option>
+                  <option value="BancoEstado">BancoEstado</option>
+                  <option value="Banco BCI">Banco BCI</option>
+                  <option value="Banco Scotiabank">Banco Scotiabank</option>
+                  <option value="Banco Itaú">Banco Itaú</option>
+                  <option value="Banco Falabella">Banco Falabella</option>
+                  <option value="Banco Ripley">Banco Ripley</option>
+                  <option value="Banco Security">Banco Security</option>
+                  <option value="Banco BICE">Banco BICE</option>
+                  <option value="Banco Internacional">Banco Internacional</option>
+                  <option value="Banco Consorcio">Banco Consorcio</option>
+                  <option value="Banco BTG Pactual">Banco BTG Pactual</option>
+                  <option value="Coopeuch">Coopeuch</option>
+                  <option value="HSBC Chile">HSBC Chile</option>
+                </optgroup>
+                <optgroup label="Digitales">
+                  <option value="Tenpo">Tenpo</option>
+                  <option value="Mercado Pago">Mercado Pago</option>
+                  <option value="Mach">Mach</option>
+                  <option value="Cuenta RUT">Cuenta RUT</option>
+                  <option value="FPAY">FPAY</option>
+                  <option value="Copec Pay">Copec Pay</option>
+                  <option value="Prepago Los Héroes">Prepago Los Héroes</option>
+                  <option value="Caja Los Andes">Caja Los Andes</option>
+                  <option value="Tapp">Tapp</option>
+                  <option value="Wilobank">Wilobank</option>
+                </optgroup>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="account-type">Tipo de cuenta</label>
+              <select id="account-type" required>
+                <option value="" disabled selected>Selecciona tipo de cuenta</option>
+                <option value="Cuenta corriente">Cuenta corriente</option>
+                <option value="Cuenta de ahorro">Cuenta de ahorro</option>
+                <option value="Cuenta vista">Cuenta vista</option>
+                <option value="Cuenta RUT">Cuenta RUT</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="account-number">Número de cuenta</label>
+              <input type="number" id="account-number" placeholder="Ej. 12345678" required>
+            </div>
+
+            <div class="form-group">
+              <label for="account-holder">Titular de la cuenta</label>
+              <input type="text" id="account-holder" placeholder="Nombre completo del titular" required>
+            </div>
+          </div>
+
+          <div class="card-actions justify-between mt-6">
+            <button type="button" class="btn-secondary" onclick="goToStep(0)">Atrás</button>
+            <button type="submit" class="btn-primary ripple-btn">
+              Continuar
+              <span class="btn-arrow">→</span>
+            </button>
+          </div>
+        </form>
+      </section>
+
+      <!-- SCREEN 2: TOOL ACTIVATION (CORREO ENVIADO - MATCHES PHOTO) -->
+      <section class="onboarding-card" id="screen-2">
+        <div class="card-icon-header success">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="hero-icon animated-mail">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
+          </svg>
+        </div>
+        
+        <h2 class="card-title">¡Registro completado! Correo enviado</h2>
+        <p class="card-subtitle">Hemos enviado instrucciones seguras a tu cuenta de correo electrónico registrada para la activación de tu herramienta.</p>
+
+        <div class="info-highlight-box">
+          <h3 class="mb-4">¿Qué debes hacer ahora?</h3>
+          <p>
+            Por seguridad y para mantener la transparencia del proceso, el enlace de activación de tu línea telefónica internacional eSIM y los detalles de las credenciales se gestionan de forma externa.
+          </p>
+          <div class="instruction-steps">
+            <div class="inst-step">
+              <span class="inst-num">1</span>
+              <span>Revisa tu <strong>Bandeja de Entrada</strong> (o carpeta de Spam/Promociones).</span>
+            </div>
+            <div class="inst-step">
+              <span class="inst-num">2</span>
+              <span>Abre el correo con el asunto <strong>"Atlas Cobros – Activación de Línea Internacional"</strong>.</span>
+            </div>
+            <div class="inst-step">
+              <span class="inst-num">3</span>
+              <span>Sigue el enlace del proveedor externo para activar tu eSIM de trabajo.</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="card-actions justify-between mt-6">
+          <button class="btn-secondary" onclick="goToStep(1)">Atrás</button>
+          <button class="btn-primary ripple-btn" onclick="goToStep(3)">
+            Continuar
+            <span class="btn-arrow">→</span>
+          </button>
+        </div>
+      </section>
+
+      <!-- SCREEN 3: CODE VALIDATION -->
+      <section class="onboarding-card" id="screen-3">
+        <div class="card-icon-header">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="hero-icon">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 5.25a3 3 0 013 3m3 0a6 6 0 01-7.029 5.912c-.563-.097-1.159.026-1.563.43L10.5 17.25H8.25v2.25H6v2.25H2.25v-2.818c0-.597.237-1.17.659-1.591l6.499-6.499c.404-.404.527-1 .43-1.563A6 6 0 1121.75 8.25z" />
+          </svg>
+        </div>
+
+        <h2 class="card-title">Ingresa tu código de activación</h2>
+        <p class="card-subtitle">Tu código de activación es requerido para continuar tu proceso en Atlas Cobros. Este código fue enviado automáticamente al correo electrónico registrado después de la activación del chip.</p>
+
+        <!-- Integrated Validation Code Field -->
+        <form id="code-validation-form" onsubmit="handleCodeSubmit(event)">
+          <div class="form-group code-input-group">
+            <label for="activation-code">Código de activación</label>
+            <input type="text" id="activation-code" placeholder="Ingresa tu código único de acceso" required autocomplete="off">
+            <p class="error-text" id="code-error" style="display:none;">Código inválido, intenta nuevamente</p>
+          </div>
+
+          <div class="sandbox-simulator-banner">
+            <p>💡 <strong>Modo Demo / Simulación:</strong> Ingresa el código <strong>ATLAS2026</strong> para simular una validación exitosa.</p>
+          </div>
+
+          <div class="card-actions justify-between mt-6">
+            <button type="button" class="btn-secondary" onclick="goToStep(2)">Atrás</button>
+            <button type="submit" class="btn-primary ripple-btn">
+              Validar código
+              <span class="btn-arrow">→</span>
+            </button>
+          </div>
+        </form>
+      </section>
+
+      <!-- SCREEN 4: TRAINING -->
+      <section class="onboarding-card" id="screen-4">
+        <div class="card-icon-header">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="hero-icon">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4.26 10.147a60.436 60.436 0 00-.491 6.347A48.62 48.62 0 0112 20.904a48.62 48.62 0 018.232-4.41 60.46 60.46 0 00-.491-6.347m-15.482 0a50.57 50.57 0 00-2.658-.813A59.905 59.905 0 0112 3.493a59.902 59.902 0 0110.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.717 50.717 0 0112 13.489a50.702 50.702 0 017.74-3.342M22.25 12v4.25m-1.836-1.861L20.25 18" />
+          </svg>
+        </div>
+        
+        <h2 class="card-title">Capacitación online</h2>
+        <p class="card-subtitle">Tu registro ha sido verificado exitosamente. La capacitación se realizará con personas de la empresa a través de Google Meet. Al finalizar el proceso de registro, se te enviará el horario correspondiente.</p>
+
+        <div class="info-highlight-box">
+          <h3 class="mb-4">Durante esta etapa aprenderás:</h3>
+          <ul class="clean-list">
+            <li>
+              <span class="bullet-dot"></span>
+              <span>Uso de la plataforma digital</span>
+            </li>
+            <li>
+              <span class="bullet-dot"></span>
+              <span>Flujo de gestión de compromisos</span>
+            </li>
+            <li>
+              <span class="bullet-dot"></span>
+              <span>Protocolos de contacto ético y regulaciones aplicables</span>
+            </li>
+            <li>
+              <span class="bullet-dot"></span>
+              <span>Proceso operativo diario</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="card-actions justify-between">
+          <button class="btn-secondary" onclick="goToStep(3)">Atrás</button>
+          <button class="btn-primary ripple-btn" onclick="goToStep(5)">
+            Continuar
+            <span class="btn-arrow">→</span>
+          </button>
+        </div>
+      </section>
+
+      <!-- SCREEN 5: SUCCESS / WELCOME (UPDATED CLEAN CLOSE) -->
+      <section class="onboarding-card" id="screen-5">
+        <div class="success-checkmark">
+          <div class="check-icon">
+            <span class="icon-line line-tip"></span>
+            <span class="icon-line line-long"></span>
+            <div class="icon-circle"></div>
+            <div class="icon-fix"></div>
+          </div>
+        </div>
+        
+        <h2 class="card-title text-success text-center">¡Proceso Completado con Éxito!</h2>
+        <p class="card-subtitle text-center">Tu incorporación en Atlas Cobros ha sido registrada en el sistema.</p>
+
+        <div class="info-highlight-box">
+          <h3 class="mb-4">Próximos pasos importantes:</h3>
+          <div class="flow-preview-list">
+            <div class="flow-preview-item">
+              <div class="item-circle success">📩</div>
+              <div class="item-details">
+                <h4>Confirmación de Capacitación</h4>
+                <p>En los próximos minutos recibirás un correo electrónico con la fecha, hora y enlace de acceso para tu capacitación online obligatoria.</p>
+              </div>
+            </div>
+            <div class="flow-preview-item">
+              <div class="item-circle success">💼</div>
+              <div class="item-details">
+                <h4>Asignación de Cartera de Clientes</h4>
+                <p>Una vez finalizada y aprobada la capacitación, se habilitará tu acceso al panel de operaciones y se te entregará tu cartera de clientes inicial para comenzar a trabajar.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="success-footer-message text-center mt-6">
+          <p>💡 <em>Por favor, mantente atento a tu correo electrónico registrado (incluyendo bandeja de spam o promociones).</em></p>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- Footer branding -->
+    <footer class="onboarding-footer">
+      <p>© 2026 Atlas Cobros. Todos los derechos reservados. Cumplimiento de normativa de contacto y protección de datos.</p>
+    </footer>
+  </div>
+
+  <!-- Scripts -->
+  <script src="script.js"></script>
+</body>
+</html>
